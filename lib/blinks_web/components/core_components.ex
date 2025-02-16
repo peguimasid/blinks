@@ -17,7 +17,7 @@ defmodule BlinksWeb.CoreComponents do
   use Phoenix.Component
 
   alias Phoenix.LiveView.JS
-  import BlinksWeb.Gettext
+  use Gettext, backend: BlinksWeb.Gettext
 
   @doc """
   Renders a modal.
