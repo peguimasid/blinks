@@ -11,8 +11,7 @@ defmodule Blinks.LinksFixtures do
     {:ok, link} =
       attrs
       |> Enum.into(%{
-        title: "some title",
-        url: "some url"
+        url: "https://example.com"
       })
       |> Blinks.Links.create_link()
 

@@ -8,7 +8,7 @@ defmodule Blinks.LinksTest do
 
     import Blinks.LinksFixtures
 
-    @invalid_attrs %{title: nil, url: nil}
+    @invalid_attrs %{url: nil}
 
     test "list_links/0 returns all links" do
       link = link_fixture()
@@ -21,11 +21,10 @@ defmodule Blinks.LinksTest do
     end
 
     test "create_link/1 with valid data creates a link" do
-      valid_attrs = %{title: "some title", url: "some url"}
+      valid_attrs = %{url: "https://somelink.com"}
 
       assert {:ok, %Link{} = link} = Links.create_link(valid_attrs)
-      assert link.title == "some title"
-      assert link.url == "some url"
+      assert link.url == "https://somelink.com"
     end
 
     test "create_link/1 with invalid data returns error changeset" do
@@ -34,11 +33,10 @@ defmodule Blinks.LinksTest do
 
     test "update_link/2 with valid data updates the link" do
       link = link_fixture()
-      update_attrs = %{title: "some updated title", url: "some updated url"}
+      update_attrs = %{url: "https://somelink.com"}
 
       assert {:ok, %Link{} = link} = Links.update_link(link, update_attrs)
-      assert link.title == "some updated title"
-      assert link.url == "some updated url"
+      assert link.url == "https://somelink.com"
     end
 
     test "update_link/2 with invalid data returns error changeset" do
