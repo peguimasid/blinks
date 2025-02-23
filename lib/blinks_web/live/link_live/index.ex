@@ -54,16 +54,42 @@ defmodule BlinksWeb.LinkLive.Index do
     end
   end
 
-  def handle_event("delete", params, socket) do
-    # Links.delete_link(params)
-    IO.inspect(params)
-    {:noreply, socket}
+  def handle_event("delete", %{"id" => id}, socket) do
+    link = Links.get_link!(id)
+
+    case Links.delete_link(link) do
+      {:ok, _link} ->
+        PubSub.broadcast(Blinks.PubSub, @topic, {:delete_link, link})
+
+        socket =
+          socket
+          |> put_flash(:info, "Link deleted successfully.")
+
+        {:noreply, socket}
+
+      {:error, _reason} ->
+        socket =
+          socket
+          |> put_flash(:error, "Failed to delete link.")
+
+        {:noreply, socket}
+    end
   end
 
   def handle_info({:new_link, link}, socket) do
     socket =
       socket
       |> assign(:links, socket.assigns.links ++ [link])
+
+    {:noreply, socket}
+  end
+
+  def handle_info({:delete_link, link}, socket) do
+    updated_links = List.delete(socket.assigns.links, link)
+
+    socket =
+      socket
+      |> assign(:links, updated_links)
 
     {:noreply, socket}
   end
