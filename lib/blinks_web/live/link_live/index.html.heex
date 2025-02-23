@@ -4,7 +4,7 @@
     <.form for={@form} phx-submit="submit" id="link-form">
       <div class="flex gap-2 items-end">
         <div class="grow">
-          <.input field={@form[:url]} type="text" label="URL" />
+          <.input autocomplete="off" field={@form[:url]} type="text" label="URL" />
         </div>
         <button class="bg-black border-black hover:bg-zinc-700 text-white text-sm font-bold py-2.5 px-4 rounded-md">
           Create
