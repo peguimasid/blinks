@@ -54,6 +54,11 @@ defmodule BlinksWeb.LinkLive.Index do
     end
   end
 
+  def handle_event("delete", params, socket) do
+    IO.inspect(params)
+    {:noreply, socket}
+  end
+
   def handle_info({:new_link, link}, socket) do
     socket =
       socket

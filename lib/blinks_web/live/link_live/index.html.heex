@@ -14,8 +14,17 @@
   </div>
 
   <div class="flex flex-col gap-3">
-    <div :for={link <- @links} class="py-2 px-4 border border-md rounded-md">
-      <a href={link.url} target="_blank">{link.url} &#8594;</a>
+    <div :for={link <- @links} class="py-2 px-4 border flex border-md w-full rounded-md">
+      <a href={link.url} target="_blank" class="w-11/12 truncate">
+        {link.url} this is a test this is a test this is a test this is a test this is a test &#8594;
+      </a>
+      <button
+        phx-click="delete"
+        phx-value-id={link.id}
+        class="rounded w-1/12 flex justify-end items-center"
+      >
+        <.icon name="hero-trash" class="size-4 text-red-500" />
+      </button>
     </div>
   </div>
 </main>
