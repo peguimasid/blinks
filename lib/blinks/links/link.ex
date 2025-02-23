@@ -3,7 +3,6 @@ defmodule Blinks.Links.Link do
   import Ecto.Changeset
 
   schema "links" do
-    field :title, :string
     field :url, :string
 
     timestamps(type: :utc_datetime)
@@ -12,8 +11,8 @@ defmodule Blinks.Links.Link do
   @doc false
   def changeset(link, attrs \\ %{}) do
     link
-    |> cast(attrs, [:url, :title])
-    |> validate_required([:url, :title])
+    |> cast(attrs, [:url])
+    |> validate_required([:url])
     |> validate_url(:url)
   end
 
