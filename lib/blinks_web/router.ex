@@ -17,7 +17,13 @@ defmodule BlinksWeb.Router do
   scope "/", BlinksWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    get "/", PageController, :index
+  end
+
+  scope "/", BlinksWeb do
+    pipe_through :browser
+
+    live "/links", LinkLive.Index
   end
 
   # Other scopes may use custom stacks.
