@@ -10,9 +10,22 @@ defmodule Blinks.Links.Link do
   end
 
   @doc false
-  def changeset(link, attrs) do
+  def changeset(link, attrs \\ %{}) do
     link
     |> cast(attrs, [:url, :title])
     |> validate_required([:url, :title])
+    |> validate_url(:url)
+  end
+
+  defp validate_url(changeset, field) do
+    validate_change(changeset, field, fn _, url ->
+      case URI.parse(url) do
+        %URI{scheme: scheme, host: host} when scheme in ["http", "https"] and not is_nil(host) ->
+          []
+
+        _ ->
+          [{field, "is not a valid url"}]
+      end
+    end)
   end
 end

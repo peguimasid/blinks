@@ -24,6 +24,7 @@ defmodule BlinksWeb.Router do
     pipe_through :browser
 
     live "/links", LinkLive.Index
+    live "/links/new", LinkLive.New
   end
 
   # Other scopes may use custom stacks.
