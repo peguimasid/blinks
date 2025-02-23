@@ -25,21 +25,23 @@ defmodule BlinksWeb.LinkLiveTest do
     test "saves new link", %{conn: conn} do
       {:ok, index_live, _html} = live(conn, ~p"/links")
 
-      assert index_live
-             |> element("a", "Add link")
-             |> render_click() =~ "New Link"
+      {:ok, new_live, _html} =
+        index_live
+        |> element("a", "Add link")
+        |> render_click()
+        |> follow_redirect(conn, ~p"/links/new")
 
-      assert_patch(index_live, ~p"/links/new")
-
-      assert index_live
+      assert new_live
              |> form("#link-form", link: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
-
-      assert index_live
-             |> form("#link-form", link: @create_attrs)
              |> render_submit()
 
-      assert_patch(index_live, ~p"/links")
+      assert render(new_live) =~ "can&#39;t be blank"
+
+      {:ok, index_live, _html} =
+        new_live
+        |> form("#link-form", link: @create_attrs)
+        |> render_submit()
+        |> follow_redirect(conn, ~p"/links")
 
       html = render(index_live)
       assert html =~ "Link created successfully"
