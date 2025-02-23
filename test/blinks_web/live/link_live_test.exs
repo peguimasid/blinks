@@ -59,11 +59,14 @@ defmodule BlinksWeb.LinkLiveTest do
     #   assert html =~ "Link updated successfully"
     # end
 
-    # test "deletes link in listing", %{conn: conn, link: link} do
-    #   {:ok, index_live, _html} = live(conn, ~p"/links")
+    test "deletes link in listing", %{conn: conn, link: link} do
+      {:ok, index_live, _html} = live(conn, ~p"/links")
 
-    #   assert index_live |> element("#links-#{link.id} a", "Delete") |> render_click()
-    #   refute has_element?(index_live, "#links-#{link.id}")
-    # end
+      assert index_live
+             |> element("button[phx-value-id=\"#{link.id}\"]", "delete")
+             |> render_click()
+
+      refute has_element?(index_live, "#links-#{link.id}")
+    end
   end
 end
