@@ -1,16 +1,19 @@
 defmodule BlinksWeb.LinkLive.Index do
+  alias Phoenix.PubSub
   alias Blinks.Links.Link
   use BlinksWeb, :live_view
 
   alias Blinks.Links
 
+  @topic "links"
+
   def mount(_params, _session, socket) do
-    changeset = Link.changeset(%Link{})
+    PubSub.subscribe(Blinks.PubSub, @topic)
 
     socket =
       socket
       |> assign(:links, Links.list_links())
-      |> assign(:form, to_form(changeset))
+      |> assign(:form, to_form(Link.changeset(%Link{})))
 
     {:ok, socket}
   end
