@@ -2,7 +2,7 @@
   <div class="flex flex-col gap-5">
     <div class="flex justify-between items-center">
       <h1 class="text-2xl font-bold">Links</h1>
-      <.online_users count={9} />
+      <.online_users count={@online_users_count} />
     </div>
     <.form for={@form} phx-submit="create" phx-change="validate" id="link-form">
       <div class="flex gap-2 items-end">

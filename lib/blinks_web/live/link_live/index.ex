@@ -14,6 +14,7 @@ defmodule BlinksWeb.LinkLive.Index do
       socket
       |> assign(:links, Links.list_links())
       |> assign(:form, to_form(Link.changeset(%Link{})))
+      |> assign(:online_users_count, 0)
 
     {:ok, socket}
   end
