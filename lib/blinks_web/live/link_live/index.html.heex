@@ -6,7 +6,7 @@
         <div class="grow">
           <.input autocomplete="off" field={@form[:url]} type="text" label="URL" />
         </div>
-        <button class="bg-black border-black hover:bg-zinc-700 text-white text-sm font-bold py-2.5 px-4 rounded-md">
+        <button class="bg-black border-black hover:bg-zinc-700 text-white text-sm font-bold py-2.5 px-4 rounded-lg">
           Create
         </button>
       </div>
@@ -14,7 +14,7 @@
   </div>
 
   <div class="flex flex-col gap-3">
-    <div :for={link <- @links} class="py-2 px-4 border flex border-md w-full rounded-md">
+    <div :for={link <- @links} class="py-2 px-4 border flex border-md w-full rounded-lg">
       <a href={link.url} target="_blank" class="w-11/12 truncate">
         {link.url} &#8594;
       </a>
