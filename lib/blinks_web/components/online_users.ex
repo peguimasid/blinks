@@ -6,11 +6,16 @@ defmodule BlinksWeb.OnlineUsers do
 
   attr :count, :integer, required: true
 
-  def show_online_users(assigns) do
+  def online_users(assigns) do
     ~H"""
-    <p class="rounded-lg bg-zinc-100 px-2 py-1 hover:bg-zinc-200/80">
-      {@count} people online
-    </p>
+    <div class="flex items-center justify-between gap-2">
+      <p>{@count} people online</p>
+      <span class="relative flex top-0 right-0 size-3">
+        <span class="absolute flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75 [animation-duration:1.5s]">
+        </span>
+        <span class="relative inline-flex size-3 rounded-full bg-green-500"></span>
+      </span>
+    </div>
     """
   end
 end
