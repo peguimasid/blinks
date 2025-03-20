@@ -1,4 +1,5 @@
 defmodule BlinksWeb.LinkLive.Index do
+  alias BlinksWeb.OnlineUsersCounter
   alias Phoenix.PubSub
   alias Blinks.Links.Link
   use BlinksWeb, :live_view
@@ -8,7 +9,11 @@ defmodule BlinksWeb.LinkLive.Index do
   @topic "links"
 
   def mount(_params, _session, socket) do
-    PubSub.subscribe(Blinks.PubSub, @topic)
+    if connected?(socket) do
+      PubSub.subscribe(Blinks.PubSub, @topic)
+      PubSub.subscribe(Blinks.PubSub, OnlineUsersCounter.online_users_topic())
+      OnlineUsersCounter.track_online_user()
+    end
 
     socket =
       socket
@@ -91,6 +96,14 @@ defmodule BlinksWeb.LinkLive.Index do
     socket =
       socket
       |> assign(:links, updated_links)
+
+    {:noreply, socket}
+  end
+
+  def handle_info(%Phoenix.Socket.Broadcast{} = _event, socket) do
+    socket =
+      socket
+      |> assign(:online_users_count, OnlineUsersCounter.get_online_users_count())
 
     {:noreply, socket}
   end
