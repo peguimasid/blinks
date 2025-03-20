@@ -1,4 +1,4 @@
-defmodule BlinksWeb.OnlineUsersCount do
+defmodule BlinksWeb.OnlineUsers do
   @moduledoc """
   Component to show the count of online users.
   """
@@ -6,7 +6,7 @@ defmodule BlinksWeb.OnlineUsersCount do
 
   attr :count, :integer, required: true
 
-  def online_users_count(assigns) do
+  def online_users(assigns) do
     ~H"""
     <div class="flex items-center justify-between gap-2">
       <p>{@count} people online</p>

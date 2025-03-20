@@ -85,7 +85,7 @@ defmodule BlinksWeb do
       import Phoenix.HTML
       # Core UI components and translation
       import BlinksWeb.CoreComponents
-      import BlinksWeb.OnlineUsersCount
+      import BlinksWeb.OnlineUsers
       import BlinksWeb.Gettext
 
       # Shortcut for generating JS commands
