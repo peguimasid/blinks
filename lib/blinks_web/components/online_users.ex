@@ -6,10 +6,23 @@ defmodule BlinksWeb.OnlineUsers do
 
   attr :count, :integer, required: true
 
+  def online_users(%{count: 0} = assigns) do
+    ~H"""
+    <div class="flex items-center justify-between gap-2">
+      <p>1 user online</p>
+      <span class="relative flex top-0 right-0 size-2.5">
+        <span class="absolute flex h-full w-full animate-ping rounded-full bg-green-300 opacity-75 [animation-duration:1.5s]">
+        </span>
+        <span class="relative inline-flex size-2.5 rounded-full bg-green-400"></span>
+      </span>
+    </div>
+    """
+  end
+
   def online_users(assigns) do
     ~H"""
     <div class="flex items-center justify-between gap-2">
-      <p>{@count} people online</p>
+      <p>{@count} user{if @count == 1, do: "", else: "s"} online</p>
       <span class="relative flex top-0 right-0 size-2.5">
         <span class="absolute flex h-full w-full animate-ping rounded-full bg-green-300 opacity-75 [animation-duration:1.5s]">
         </span>

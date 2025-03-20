@@ -17,7 +17,8 @@ defmodule Blinks.Application do
       # Start a worker by calling: Blinks.Worker.start_link(arg)
       # {Blinks.Worker, arg},
       # Start to serve requests, typically the last entry
-      BlinksWeb.Endpoint
+      BlinksWeb.Endpoint,
+      BlinksWeb.Presence
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
